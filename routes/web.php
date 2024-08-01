@@ -40,6 +40,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/message/{user}/chat', [MessageController::class, 'store'])->name('message.store');
     Route::get('/message/{user}/display', [MessageController::class, 'display'])->name('message.display');
 
+    //CCART
+    Route::get('/products', 'ProductController@index');
+    Route::post('/cart/add', 'CartController@add');
+    Route::get('/cart', 'CartController@index');
+    Route::post('/cart/update', 'CartController@update');
+    Route::post('/cart/delete', 'CartController@delete');
+    Route::post('/cart/reserve', 'CartController@reserve');
+    Route::post('/cart/cancel-reservation', 'CartController@cancelReservation');
+
+
        
 
     
