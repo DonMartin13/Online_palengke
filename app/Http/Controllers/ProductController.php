@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Products;
 use App\Models\Seller;
+use App\Models\Reservation;
 
 
 class ProductController extends Controller
@@ -14,11 +15,9 @@ class ProductController extends Controller
     public function index(){
         $products = Products::all();
         return view('products.index',['products' => $products]);
-
-        
     }
 
-     public function create(Seller $seller){
+    public function create(Seller $seller){
         return view('products.create', ['seller' => $seller]);
     }
 
@@ -59,14 +58,33 @@ class ProductController extends Controller
         return redirect(route('dashboard'))->with('success', 'Product updated successfully.');
     }
 
-    public function delete(Products $product){
+    public function delete(Products $product)
+    {
         $product ->delete();
         return redirect(route('dashboard'))->with('success', 'Product deleted successfully.');
     }
 
-    public function reserve(Products $product){
+    public function reserve(Products $product)
+    {
         return view('products.reserve',['product' => $product]);
     }
 
-    
+    public function save(Products $product, Request $request)
+    {
+        $data = $request -> validate([
+            'quantity' => 'required|numeric',
+            'pickup_date' => 'required|date',
+            'notes' => 'sometimes|nullable'
+        ]);
+
+        $authUser = Auth::user();
+        $data['product_id'] = $product->id;
+        $data['seller_id'] = $product ->seller_id;
+        $data['customer_id'] = $authUser ->id;
+        $data['notes'] = $data['notes'] ?? 'none';
+
+        $newReservation = Reservation::create($data);
+        
+        return redirect(route('dashboard'));
+    }
 }

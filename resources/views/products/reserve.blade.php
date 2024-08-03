@@ -246,23 +246,32 @@
 </head>
 <body>
     <div class="cart-item">
-        <h2>{{ Auth::user()->name }} Product</h2>
+        <h2>{{ Auth::user()->name }} {{$product->product_name}}</h2>
         <div class="item">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRqsbpNzTz8wXYvdqnFq9VRcj5uBoeaM13w&s" alt="Whole Chicken">
             <div class="item-details">
                 <p>{{ $product->product_name }}</p>
                 <span class="item-category">{{ $product->product_description }}</span>
+                <span class="item-category">Available Stock: {{ $product->qty }}</span>
                 <br>
                 <div class="quantity">
                     <button class="decrement" onclick="updateQuantity(this, -1)">-</button>
                     <input type="text" value="1" readonly>
                     <button class="increment" onclick="updateQuantity(this, 1)">+</button>
                 </div>
-                <button class="reserve" onclick="showCalendar(this)">Reserve</button>
-                <p class="reserved-date"></p>
-                <button class="cancel-reservation" onclick="cancelReservation(this)">Cancel Reservation</button>
-                <button class="delete-button" onclick="deleteProduct(this)">Delete</button>
-                <p class="price">₱ {{ $product->price }}</p>
+                <form method = "post" action = "{{ route('product.save', ['product' => $product]) }}">
+                    @csrf
+                    @method('post')
+
+                    <input type = "hidden" name = "quantity" id = "qtyInput" value = "1"/>
+                    <p class="price">₱ {{ $product->price }}</p>
+                    <label for="date" >Pickup Date:</label>
+                    <input type = "date" id = "pickup_date" name="pickup_date"/>
+                    <label for="notes">Notes:</label>
+                    <input type ="text" name = "notes"/>
+                    <input type="submit" class="reserve" value = "Reserve"/>
+                </form>
+                <button class="delete-button">Back</button>
             </div>
         </div>
     </div>
@@ -275,15 +284,31 @@
 
 <script>
     function updateQuantity(button, increment) {
-        const input = button.parentElement.querySelector('input');
+
+        const stock = {{$product -> qty}};
+
+        const input = button.parentElement.querySelector('input[type="text"]');
         let currentValue = parseInt(input.value);
         currentValue += increment;
 
         if (currentValue < 0) {
             currentValue = 0;
+        }else if(currentValue > stock)
+        {
+            currentValue = stock;
         }
 
         input.value = currentValue;
+        document.getElementById('qtyInput').value = currentValue;
+    }
+
+    function validateAndSubmit(form) {
+        const quantity = parseInt(document.getElementById('qty-input').value);
+        if (quantity > availableStock) {
+            alert("Quantity exceeds available stock.");
+            return false;
+        }
+        return true; 
     }
 
     function showCalendar(button) {

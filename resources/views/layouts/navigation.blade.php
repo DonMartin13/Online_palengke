@@ -19,6 +19,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Basket') }}
                     </x-nav-link>
+                  
                     <x-nav-link :href="route('message.index')" :active="request()->routeIs('message.index')">
                         {{ __('Message') }}
                     </x-nav-link>

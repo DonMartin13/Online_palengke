@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,7 +26,7 @@ Route::middleware('auth')->group(function () {
 
     //SAVE PRODUCT TO DATABASE
     Route::post('/product', [ProductController::class, 'store'])->name('product.store');
-    Route::post('/product/create/save', [ProductController::class, 'save'])->name('product.save');
+    Route::post('/product/save/{product}', [ProductController::class, 'save'])->name('product.save');
 
     //MANIPULATE DATA AND SAVE TO DATABASE
     Route::get('/product/{product}/edit', [ProductController::class,'edit'])->name('product.edit');
@@ -41,9 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/message/{user}/display', [MessageController::class, 'display'])->name('message.display');
 
     //CCART
-    Route::get('/products', 'ProductController@index');
     Route::post('/cart/add', 'CartController@add');
-    Route::get('/cart', 'CartController@index');
+    Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/update', 'CartController@update');
     Route::post('/cart/delete', 'CartController@delete');
     Route::post('/cart/reserve', 'CartController@reserve');
