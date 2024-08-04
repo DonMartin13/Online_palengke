@@ -46,19 +46,19 @@
                                 @foreach($products as $product)
                                 <tr class="border-b border-neutral-200 dark:border-white/10 text-gray-900">
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 flex justify-center items-center">
-                                        <img src="https://cdn.britannica.com/18/137318-050-29F7072E/rooster-Rhode-Island-Red-roosters-chicken-domestication.jpg" alt="Product Image" class="w-12 h-12 rounded-full">
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTziMhpKv63InSLRCrOzV8TZu2D5Adb2upSMMnSRhNMM9f-wvAtDnoViYQs6BJShIFaGeU&usqp=CAU" alt="Product Image" class="w-12 h-12 rounded-full">
                                     </td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 font-medium dark:border-white/10">{{$product->product_name}}</td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 font-medium dark:border-white/10">{{$product->product_description}}</td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 font-medium dark:border-white/10">{{$product->qty}}</td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 font-medium dark:border-white/10">{{$product->price}}</td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4">
-                                        <a class="text-blue-500 hover:underline" href="{{ route('product.edit', ['product' => $product]) }}">Edit</a>
+                                        <a class="text-blue-500 hover:underline" href="{{ route('product.edit', $product) }}">Edit</a>
                                     </td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4">
-                                        <form method="post" action="{{ route('product.delete', ['product' => $product]) }}">
+                                        <form method="POST" action="{{ route('product.delete', $product) }}">
                                             @csrf
-                                            @method('delete')
+                                            @method('DELETE')
                                             <input type="submit" value="Delete" class="text-red-500 hover:underline cursor-pointer">
                                         </form>
                                     </td>
@@ -96,7 +96,7 @@
                                @foreach($reservations as $reservation)
                                 <tr class="border-b border-neutral-200 dark:border-white/10 text-gray-900">
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 flex justify-center items-center">
-                                        <img src="https://cdn.britannica.com/18/137318-050-29F7072E/rooster-Rhode-Island-Red-roosters-chicken-domestication.jpg" alt="Product Image" class="w-12 h-12 rounded-full">
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTziMhpKv63InSLRCrOzV8TZu2D5Adb2upSMMnSRhNMM9f-wvAtDnoViYQs6BJShIFaGeU&usqp=CAU" alt="Product Image" class="w-12 h-12 rounded-full">
                                     </td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 font-medium dark:border-white/10">{{$reservation->product->product_name}}</td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 font-medium dark:border-white/10">{{$reservation->product->product_description}}</td>
@@ -105,12 +105,13 @@
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 font-medium dark:border-white/10">{{$reservation->pickup_date}}</td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 font-medium dark:border-white/10">{{$reservation->notes}}</td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4">
-                                        <a class="text-blue-500 hover:underline" href="{{ route('product.edit', ['product' => $product]) }}">Edit</a>
+                                        <a class="text-blue-500 hover:underline" href="{{ route('reservation.edit', $reservation) }}">Edit</a>
+                                        <a class="text-blue-500 hover:underline" href="{{ route('reservation.edit', $reservation) }}">Edit</a>
                                     </td>
                                     <td class="whitespace-nowrap border-e border-neutral-200 px-6 py-4">
-                                        <form method="post" action="{{ route('product.delete', ['product' => $product]) }}">
+                                        <form method="POST" action="{{ route('reservation.delete', $reservation) }}">
                                             @csrf
-                                            @method('delete')
+                                            @method('DELETE')
                                             <input type="submit" value="Delete" class="text-red-500 hover:underline cursor-pointer">
                                         </form>
                                     </td>

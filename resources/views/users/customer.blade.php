@@ -17,7 +17,7 @@
             @foreach($reservations as $reservation)
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6">
                 <div class="flex items-center space-x-4 mb-4">
-                    <img src="https://cdn.britannica.com/18/137318-050-29F7072E/rooster-Rhode-Island-Red-roosters-chicken-domestication.jpg" alt="Product Image" class="w-16 h-16 rounded-full">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTziMhpKv63InSLRCrOzV8TZu2D5Adb2upSMMnSRhNMM9f-wvAtDnoViYQs6BJShIFaGeU&usqp=CAU" alt="Product Image" class="w-16 h-16 rounded-full">
                     <div>
                         <h3 class="text-lg font-medium text-gray-900">&nbsp&nbsp&nbsp&nbsp{{ $reservation->product->product_name }}</h3>
                         <p class="text-sm text-gray-500">&nbsp&nbsp&nbsp&nbsp&nbsp{{ $reservation->product->product_description }}</p>

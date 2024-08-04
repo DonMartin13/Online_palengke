@@ -272,7 +272,7 @@ body {
                             <div class="picture-group">
                                 <picture class="item-picture">
                                     <source src="" media="(max-width: 600px)">
-                                    <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRqsbpNzTz8wXYvdqnFq9VRcj5uBoeaM13w&s" alt="gallery" width="305" height="400">
+                                    <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTziMhpKv63InSLRCrOzV8TZu2D5Adb2upSMMnSRhNMM9f-wvAtDnoViYQs6BJShIFaGeU&usqp=CAU" alt="gallery" width="305" height="400">
                                 </picture>
                             </div>
                             <div class="item-details">
